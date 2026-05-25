@@ -11,7 +11,6 @@ WebServer server(80);
 
 void setup() {
   Serial.begin(115200);
-  while(!Serial) delay(10);
   Serial.println("Serial ready!");
   
   setUpMotors();
