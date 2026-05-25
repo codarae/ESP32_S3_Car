@@ -40,6 +40,7 @@ Each TB6612FNG handles two motors (one per channel). Pin assignments:
 - Battery positive → Buck converter IN+
 - Buck converter OUT+ (set to 5V) → ESP32-S3 Zero 5V pin
 - Battery positive → TB6612 VM
+- ESP32-S3 Zero 3.3V pin → TB6612 VCC
 - All grounds shared on common rail
 
 ## File Structure
