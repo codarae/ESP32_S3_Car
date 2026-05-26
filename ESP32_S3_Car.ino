@@ -15,22 +15,17 @@ void setup() {
   
   setUpMotors();
 
-  WiFi.softAP(ssid, password);
+  WiFi.softAP(ssid, password); // creates a Wifi access point with the given SSID and password
   Serial.println("AP Started");
   Serial.print("IP: ");
   Serial.println(WiFi.softAPIP());
   
-  server.on("/forward", handleForward);
-  server.on("/backward", handleBackward);
-  server.on("/left", handleLeft);
-  server.on("/right", handleRight);
-  server.on("/stop", handleStop);
-  
-  server.begin();
+  setUpServer(); // call func to set up server routes and turn on server
+
   Serial.println("Server Started");
 }
 
 
 void loop() {
-  server.handleClient();
+  server.handleClient(); // checks if a client has made a request and calls the appropriate handler function
 }

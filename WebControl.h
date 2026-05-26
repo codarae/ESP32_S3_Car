@@ -10,5 +10,7 @@ void handleBackward();
 void handleRight();
 void handleLeft();
 void handleStop();
+void handleRoot();
+void setUpServer();
 
 #endif
