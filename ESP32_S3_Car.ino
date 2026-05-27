@@ -28,4 +28,6 @@ void setup() {
 
 void loop() {
   server.handleClient(); // checks if a client has made a request and calls the appropriate handler function
+
+  processDNS(); // processes DNS requests for the captive portal
 }
