@@ -47,11 +47,11 @@ Each TB6612FNG handles two motors (one per channel). Pin assignments:
 
 ```
 ESP32_S3_Car/
-├── main.ino          # Entry point, WiFi AP setup, server routes
+├── ESP32_S3_Car.ino  # Entry point: WiFi AP setup, web server instantiation, main loop
 ├── driving.h         # Motor function declarations
 ├── driving.cpp       # Motor pin definitions and drive functions
 ├── WebControl.h      # HTTP handler declarations, extern server reference
-└── WebControl.cpp    # HTTP route handler implementations
+└── WebControl.cpp    # HTTP route handlers, DNS server for captive portal
 ```
 
 ## Usage
@@ -63,11 +63,25 @@ ESP32_S3_Car/
 
 | Route | Action |
 |---|---|
+| `/` | Serves the HTML control page |
 | `/forward` | Drive forward |
 | `/backward` | Drive backward |
 | `/left` | Turn left (tank steering) |
 | `/right` | Turn right (tank steering) |
 | `/stop` | Stop all motors |
+
+### Captive Portal
+
+The firmware runs a DNS server that intercepts all domain requests and redirects them to the ESP32's IP, so connecting to the WiFi network on most devices will automatically open the control page. The following detection URLs are also handled and redirect to the control page:
+
+- `/generate_204` (Android)
+- `/hotspot-detect.html` (Apple)
+- `/connecttest.txt` (Windows)
+- `/ncsi.txt` (Windows)
+
+## Motor Speeds
+
+Forward and backward use a PWM value of **50** (out of 255). Left and right turns use a PWM value of **100** for tighter, more responsive spinning.
 
 ## Arduino IDE Setup
 
